@@ -1,0 +1,169 @@
+﻿Imports System.Data.SqlClient
+Imports System.Data
+Imports System.Xml
+Imports System.Security.Cryptography
+
+Partial Class _Default
+    Inherits System.Web.UI.Page
+    Dim err As String
+    Dim countuser, userDesc, userid, userType, opertype As String
+
+    Public conn As New SqlConnection(ConfigurationManager.ConnectionStrings("dbconnect").ToString)
+    Public sapconn As New SqlConnection(ConfigurationManager.ConnectionStrings("sapconnect").ToString)
+
+    Private Shared DES As New TripleDESCryptoServiceProvider
+    Private Shared MD5 As New MD5CryptoServiceProvider
+
+    Public Shared Function MD5Hash(ByVal value As String) As Byte()
+        Return MD5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(value))
+    End Function
+
+    Protected Sub cmdlogin_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles cmdlogin.Click
+        If txtmachine_name.Text = "" Then
+            err = err + "Machine Name cannot be blank."
+            txtmachine_name.BorderColor = Drawing.Color.Red
+        Else
+            txtmachine_name.BorderColor = Drawing.Color.Empty
+        End If
+        If txtpword.Text = "" Then
+            err = err + "<br>Password cannot be blank."
+            txtpword.BorderColor = Drawing.Color.Red
+        Else
+            txtpword.BorderColor = Drawing.Color.Empty
+        End If
+        If err <> "" Then
+            lblerr.Text = "<div class='diverror'><div class='labelerror'>" + err + "</div></div>"
+        Else
+            getUser(txtmachine_name.Text)
+            If countuser > 0 Then
+                If userType = 1 Then
+                    Response.Redirect("admingetmo.aspx?id=" & userid & "&ut=" & userType & "&ot=" & opertype & "&mnu=getmo")
+                Else
+                    'Response.Redirect("main.aspx?id=" & userid & "&ut=" & userType & "&ot=" & opertype & "&mnu=getmo")
+                    Response.Redirect("getmo_main.aspx?id=" & userid & "&ut=" & userType & "&ot=" & opertype & "&mnu=getmo")
+                End If
+            Else
+                lblerr.Text = "<div class='diverror'><div class='labelerror'><br>Invalid Username or password.</div></div>"
+            End If
+
+        End If
+    End Sub
+
+    Public Sub getUser(ByVal uname As String)
+        'encryptpassword to check
+        Dim encryptedpass As String
+
+        Dim key As String = "maychell31"
+        DES.Key = _Default.MD5Hash(key)
+        DES.Mode = CipherMode.ECB
+        Dim Buffer As Byte() = ASCIIEncoding.ASCII.GetBytes(txtpword.Text)
+        encryptedpass = Convert.ToBase64String(DES.CreateEncryptor().TransformFinalBlock(Buffer, 0, Buffer.Length))
+
+        Dim sql_getuser As String = "select profiles.description, users.id, profiles.user_type, oper_types.code from users inner join profiles on users.id = profiles.user_id left join oper_types on oper_types.id = profiles.operation_type where user_name = '" + uname + "' and pass = '" + encryptedpass + "'"
+        Dim readUser As New SqlCommand(sql_getuser, conn)
+        Dim userRows As SqlDataReader
+
+        '##Count if there is an existing user
+        conn.Open()
+        userRows = readUser.ExecuteReader
+        While userRows.Read
+            userDesc = userRows(0)
+            userid = userRows(1)
+            userType = userRows(2)
+            countuser = countuser + 1
+            opertype = userRows(3)
+        End While
+        conn.Close()
+        '#End count and return the name of the user
+
+    End Sub
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        'connection for shopfloor database
+        Try
+            conn.Open()
+            If conn.State = ConnectionState.Open Then
+
+            Else
+                Response.Redirect("settings.aspx?set=sh")
+            End If
+            conn.Close()
+        Catch
+            Response.Redirect("settings.aspx?set=sh")
+        End Try
+
+        'connection for sap database
+        Try
+            sapconn.Open()
+            If sapconn.State = ConnectionState.Open Then
+
+            Else
+                Response.Redirect("settings.aspx?set=sap")
+            End If
+            sapconn.Close()
+        Catch
+            Response.Redirect("settings.aspx?set=sap")
+        End Try
+        'get if the table for sap exist
+
+        Dim tblexist As String
+        conn.Open()
+        Dim sql_checktblexist As String = "select path_name from path_settings where id = 2"
+        Dim checktblexist As New SqlCommand(sql_checktblexist, conn)
+        checktblexist = New SqlCommand(sql_checktblexist, conn)
+        tblexist = checktblexist.ExecuteScalar
+        conn.Close()
+
+        sapconn.Open()
+
+        Dim restrictions(3) As String
+        restrictions(2) = tblexist
+        Dim dbTbl As DataTable = sapconn.GetSchema("Tables", restrictions)
+
+        If dbTbl.Rows.Count = 0 Then
+            'Table does not exist
+            Response.Redirect("settings.aspx?set=sap&tbl=1")
+        Else
+            'Table exists
+
+        End If
+
+        dbTbl.Dispose()
+        sapconn.Close()
+        sapconn.Dispose()
+        txtbarcodeuser.Focus()
+    End Sub
+
+    Protected Sub txtbarcodeuser_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtbarcodeuser.TextChanged
+        If IsNumeric(txtbarcodeuser.Text) Then
+
+            Dim userids As Integer = (txtbarcodeuser.Text / 100)
+            Dim sql_getuser As String = "select profiles.description, users.id, profiles.user_type, oper_types.code from users inner join profiles on users.id = profiles.user_id left join oper_types on oper_types.id = profiles.operation_type where users.id = '" + userids.ToString + "'"
+            Dim readUser As New SqlCommand(sql_getuser, conn)
+            Dim userRows As SqlDataReader
+
+            '##Count if there is an existing user
+            conn.Open()
+            userRows = readUser.ExecuteReader
+            While userRows.Read
+                userDesc = userRows(0)
+                userid = userRows(1)
+                userType = userRows(2)
+                countuser = countuser + 1
+                opertype = userRows(3)
+            End While
+            conn.Close()
+            '#End count and return the name of the user
+            If countuser > 0 Then
+                If userType = 1 Then
+                    Response.Redirect("admingetmo.aspx?id=" & userid & "&ut=" & userType & "&ot=" & opertype & "&mnu=getmo")
+                Else
+                    'Response.Redirect("main.aspx?id=" & userid & "&ut=" & userType & "&ot=" & opertype & "&mnu=getmo")
+                    Response.Redirect("getmo_main.aspx?id=" & userid & "&ut=" & userType & "&ot=" & opertype & "&mnu=getmo")
+                End If
+            Else
+                lblerr.Text = "<div class='diverror'><div class='labelerror'><br>Invalid Username or password.</div></div>"
+            End If
+        End If
+    End Sub
+End Class

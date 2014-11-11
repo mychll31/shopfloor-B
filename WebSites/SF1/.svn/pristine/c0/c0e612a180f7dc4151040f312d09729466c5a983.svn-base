@@ -1,0 +1,127 @@
+﻿Imports System.Data
+Imports System.Data.SqlClient
+
+Partial Class About
+    Inherits System.Web.UI.Page
+    Public conn As New SqlConnection(ConfigurationManager.ConnectionStrings("dbconnect").ToString)
+    Dim shoprows() As String
+    Dim shoprowsCtr As Integer
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        Dim cellCtr As Integer
+        ' Current cell counter.
+        Dim cellCnt As Integer
+        '#Header
+        Dim heads() As String = {" ", "Process", "Note", "MO", "Description", "Operator", "Assistant Operator", "Helper", "Start", "End", "Good", "Rejects", "Operator Remarks"}
+        cellCnt = 12 '#Columns
+
+        Dim tRowh As New TableRow()
+        For cellCtr = 1 To cellCnt
+            Dim tCell As New TableCell()
+            tCell.Text = "<center>" & heads(cellCtr) & "</center>"
+            ' Add new TableCell object to row.
+            tRowh.Cells.Add(tCell)
+        Next
+        ' Add new row to table.
+        Table1.Rows.Add(tRowh)
+
+        Dim sql_getShopfloors As String
+        If Request.QueryString("ut") = 1 Then
+            sql_getShopfloors = "select shopfloors.id, timeTypes.name, remarks, mo, fg, operator, ass_operator, helper, start_date_time, end_date_time, quantity, rejects, oper_remarks from shopfloors inner join timeTypes on shopfloors.time_type = timeTypes.code order by id desc"
+        Else
+            sql_getShopfloors = "select shopfloors.id, timeTypes.name, remarks, mo, fg, operator, ass_operator, helper, start_date_time, end_date_time, quantity, rejects, oper_remarks from shopfloors inner join timeTypes on shopfloors.time_type = timeTypes.code where userid = '" + Request.QueryString("id") + "' order by id desc"
+        End If
+        Dim readsf As New SqlCommand(sql_getShopfloors, conn)
+        Dim sfRows As SqlDataReader
+
+        conn.Open()
+        sfRows = readsf.ExecuteReader
+        While sfRows.Read
+            Dim tRow As New TableRow()
+            For cellCtr = 1 To cellCnt
+                Dim tCell As New TableCell()
+                tCell.Text = sfRows(cellCtr).ToString
+                ' Add new TableCell object to row.
+                tRow.Cells.Add(tCell)
+            Next
+            ' Add new row to table.
+            Table1.Rows.Add(tRow)
+            'Else
+            'Call shopfloor()
+            'End If
+        End While
+        conn.Close()
+
+    End Sub
+
+    Protected Sub Button2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button2.Click
+        Table1.Rows.Clear()
+        Dim cellCtr As Integer
+        ' Current cell counter.
+        Dim cellCnt As Integer
+        '#Header
+        Dim heads() As String = {" ", "Process", "Note", "MO", "Description", "Operator", "Assistant Operator", "Helper", "Start", "End", "Good", "Rejects", "Operator Remarks"}
+        cellCnt = 12 '#Columns
+
+        Dim tRowh As New TableRow()
+        For cellCtr = 1 To cellCnt
+            Dim tCell As New TableCell()
+            tCell.Text = "<center>" & heads(cellCtr) & "</center>"
+            ' Add new TableCell object to row.
+            tRowh.Cells.Add(tCell)
+        Next
+        ' Add new row to table.
+        Table1.Rows.Add(tRowh)
+
+        Dim sql_getShopfloors As String
+        If txtsearch.Text = "" Then
+            sql_getShopfloors = "select shopfloors.id, timeTypes.name, remarks, mo, fg, operator, ass_operator, helper, start_date_time, end_date_time, quantity, rejects, oper_remarks from shopfloors inner join timeTypes on shopfloors.time_type = timeTypes.code where userid = '" + Request.QueryString("id") + "' and (start_date_time LIKE '" & lblfrom.Text & " %' or (start_date_time > '" & lblfrom.Text & "' and start_date_time < '" & lblto.Text & "')) order by id desc "
+            'and (start_date_time > '" + lblfrom.Text + "' and start_date_time < '" + lblto.Text + "') order by id desc"
+        Else
+            sql_getShopfloors = "select shopfloors.id, timeTypes.name, remarks, mo, fg, operator, ass_operator, helper, start_date_time, end_date_time, quantity, rejects, oper_remarks from shopfloors inner join timeTypes on shopfloors.time_type = timeTypes.code where userid = '" + Request.QueryString("id") + "' and (mo like '%" + txtsearch.Text + "%' or remarks like '%" + txtsearch.Text + "%' or fg like '%" + txtsearch.Text + "%' or operator like '%" + txtsearch.Text + "%' or ass_operator like '%" + txtsearch.Text + "%' or helper like '%" + txtsearch.Text + "%' or start_date_time like '%" + txtsearch.Text + "%' or end_date_time like '%" + txtsearch.Text + "%') order by id desc"
+        End If
+
+        Dim readsf As New SqlCommand(sql_getShopfloors, conn)
+        Dim sfRows As SqlDataReader
+
+        conn.Open()
+        sfRows = readsf.ExecuteReader
+        While sfRows.Read
+            Dim tRow As New TableRow()
+            For cellCtr = 1 To cellCnt
+                Dim tCell As New TableCell()
+                tCell.Text = sfRows(cellCtr).ToString
+
+                ' Add new TableCell object to row.
+                tRow.Cells.Add(tCell)
+            Next
+            ' Add new row to table.
+            Table1.Rows.Add(tRow)
+            'Else
+            'Call shopfloor()
+            'End If
+        End While
+        conn.Close()
+    End Sub
+
+    Protected Sub ImageButton1_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ImageButton1.Click
+        calfrom.Visible = True
+        calto.Visible = False
+    End Sub
+
+    Protected Sub ImageButton2_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles ImageButton2.Click
+        calto.Visible = True
+        calfrom.Visible = False
+    End Sub
+
+    Protected Sub calfrom_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles calfrom.SelectionChanged
+        lblfrom.Text = Format(calfrom.SelectedDate, "yyyy-MM-dd")
+        calfrom.Visible = False
+    End Sub
+
+    Protected Sub calto_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles calto.SelectionChanged
+        lblto.Text = Format(calto.SelectedDate, "yyyy-MM-dd")
+        calto.Visible = False
+    End Sub
+End Class

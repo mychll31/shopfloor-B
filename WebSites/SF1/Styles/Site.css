@@ -1,0 +1,718 @@
+﻿/* DEFAULTS
+----------------------------------------------------------*/
+
+body   
+{
+    background: #F1F1F1;
+    font-size: .80em;
+    font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    color: #696969;
+}
+
+a:link, a:visited
+{
+    color: #034af3;
+}
+
+a:hover
+{
+    /*color: #1d60ff;
+    text-decoration: none;*/
+}
+
+a:active
+{
+    color: #034af3;
+}
+
+p
+{
+    margin-bottom: 10px;
+    line-height: 1.6em;
+}
+
+
+/* HEADINGS   
+----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #666666;
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 200;
+    margin-bottom: 0px;
+}
+
+h1
+{
+    font-size: 1.6em;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-left: 14px;
+}
+
+h2
+{
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+h3
+{
+    font-size: 1.2em;
+}
+
+h4
+{
+    font-size: 1.1em;
+}
+
+h5, h6
+{
+    font-size: 1em;
+}
+
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0px;
+}
+
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.page
+{
+    width: 85%;
+    background-color: #fff;
+    margin: 0px auto 0px auto;
+    border: 13px solid rgba(129, 175, 203, 1);
+}
+
+.header
+{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+-webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  padding: 10px 20px 26px 20px;
+  text-decoration: none;
+    top: 0px;
+    left: 0px;
+    height: 64px;
+}
+
+.header h1
+{
+    border-style: none;
+    border-color: inherit;
+    border-width: medium;
+    font-weight: 700;
+    margin: 0px;
+    padding: 0px 0px 0px 20px;
+    color: #3498db;
+    line-height: 2em;
+    font-size: 34px;
+    position: relative;
+    top: -69px;
+    left: 100px;
+    width: 340px;
+}
+
+.main
+{
+/*padding: 0px 12px; */
+/* margin: 12px 8px 8px 8px; */
+min-height: 420px;
+/* width: 85%; */
+}
+
+.leftCol
+{
+    padding: 6px 0px;
+    margin: 12px 8px 8px 8px;
+    width: 200px;
+    min-height: 200px;
+}
+
+.footer
+{
+    color: #4e5766;
+    padding: 8px 0px 0px 0px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: normal;
+    width: 85%;
+    text-align: right;  
+}
+
+
+/* TAB MENU   
+----------------------------------------------------------*/
+
+div.hideSkiplink
+{
+    background-color:#3a4f63;
+    width:100%;
+}
+
+div.menu
+{
+    padding: 4px 0px 4px 8px;
+}
+
+div.menu ul
+{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+}
+
+div.menu ul li a, div.menu ul li a:visited
+{
+    background-color: #465c71;
+    border: 1px #4e667d solid;
+    color: #dde4ec;
+    display: block;
+    line-height: 1.35em;
+    padding: 4px 20px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+div.menu ul li a:hover
+{
+    background-color: #bfcbd6;
+    color: #465c71;
+    text-decoration: none;
+}
+
+div.menu ul li a:active
+{
+    background-color: #465c71;
+    color: #cfdbe6;
+    text-decoration: none;
+}
+
+/* FORM ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset
+{
+    margin: 1em 0px;
+    padding: 1em;
+    border: 1px solid #ccc;
+}
+
+fieldset p 
+{
+    margin: 2px 12px 10px 10px;
+}
+
+fieldset.login label, fieldset.register label, fieldset.changePassword label
+{
+    display: block;
+}
+
+fieldset label.inline 
+{
+    display: inline;
+}
+
+legend 
+{
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+
+input.textEntry 
+{
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+input.passwordEntry 
+{
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+div.accountInfo
+{
+    width: 42%;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+.clear
+{
+    clear: both;
+    height: 1px;
+}
+
+.title
+{
+    display: block;
+    float: left;
+    text-align: left;
+    width: auto;
+}
+
+.loginDisplay
+{
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    padding: 10px;
+    color: White;
+}
+
+.loginDisplay a:link
+{
+    color: white;
+}
+
+.loginDisplay a:visited
+{
+    color: white;
+}
+
+.loginDisplay a:hover
+{
+    color: white;
+}
+
+.failureNotification
+{
+    font-size: 1.2em;
+    color: Red;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+.submitButton
+{
+    text-align: right;
+    padding-right: 10px;
+}
+.login_table table,tr,td
+{
+    padding: 9px 22px;    
+}
+
+.settings table,tr,td
+{
+    padding: 6px 15px;
+}
+.login_table
+{
+    margin: 0 auto;
+    padding: 30px;
+    width: 80%;
+}
+.settings
+{
+    margin: 0 auto;
+    background-color: rgb(233, 235, 236);
+    padding: 30px;
+    width: 494px;
+}
+.btn 
+{
+    border: none;
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 6px 29px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+div.navi {
+position: relative;
+background-color: rgb(239, 249, 255);
+padding-left: 2px;
+    top: 25px;
+    left: 0px;
+    height: 1px;
+}
+#MainContent_btnout,#MainContent_cmdstart:hover,
+#MainContent_cmdsave:hover, #MainContent_cmdrecover:hover, 
+#MainContent_seslogout, #MainContent_navviewLogs, #MainContent_cmddowntime, #MainContent_cmdreg, #MainContent_Button1, #MainContent_Button6, #MainContent_Button2, #MainContent_cmdsearch:hover, #MainContent_cmdsavetable:hover,
+#MainContent_saveset:hover, #MainContent_cmdclear, #MainContent_Button3,#MainContent_Button5, 
+#MainContent_Button4:hover
+{
+border: none;
+background: rgb(239, 249, 255);
+padding: 3px 20px;
+color: rgb(54, 135, 180);
+font-weight: bolder;
+}
+
+#MainContent_seslogout
+{
+float: right;
+position: relative;
+right: -23%;
+}
+#MainContent_btnout:hover, #MainContent_btnnomo:hover, #MainContent_cmdgetmo:hover, #MainContent_changeop3:hover,
+#MainContent_cmdgetref:hover, #MainContent_cmdrecover, #MainContent_changeop1:hover, #MainContent_changeop2:hover, 
+#MainContent_navviewLogs:hover, #MainContent_cmddowntime:hover, #MainContent_Button5:hover, #MainContent_Button1:hover,
+#MainContent_cmddirect:hover, #MainContent_cmdindirect:hover, #MainContent_cmdprodd:hover, #MainContent_Button2:hover,
+#MainContent_Button3:hover, #MainContent_btnaddsubs:hover, #MainContent_cmdclear:hover, #MainContent_cmdcancel:hover,
+#MainContent_cmdstart:hover, #MainContent_cmdok:hover, #MainContent_cmdcanc:hover, #MainContent_cmdstop:hover,
+#MainContent_Button6:hover, #MainContent_seslogout:hover, #MainContent_cmdgetMO:hover, #MainContent_cmdreg:hover,
+#MainContent_cmdcontinue:hover, #MainContent_cmdstart:hover,
+#MainContent_Button5.curr, #MainContent_Button6.curr, #MainContent_cmdreg.curr, #MainContent_cmddowntime.curr,
+input#MainContent_Button1.curr, #MainContent_cmddirect.curr, #MainContent_cmdindirect.curr, #MainContent_cmdprodd.curr,
+#MainContent_cmdstart.curr, #MainContent_cmdok.curr, #MainContent_cmdstart.curr, #MainContent_cmdcanc.curr, #MainContent_cmdstop.curr, #MainContent_cmdcontinue.curr
+#MainContent_cmdsearch, #MainContent_saveset, 
+#MainContent_Button4,  input#MainContent_navviewLogs.curr, 
+#MainContent_cmdsave, #MainContent_cmdsavetable
+{
+    border: none;
+    background: rgb(54, 135, 180);
+    padding: 3px 20px;
+    color: rgb(239, 249, 255);
+    font-weight: bolder;
+}
+
+#MainContent_cancelchangeop:active,#MainContent_cmdgetmo:active ,#MainContent_cmdgetref:active,
+#MainContent_cmdsave:active, #MainContent_cmdrecover:active, MainContent_btnnomo:active,
+#MainContent_seslogout:active, #MainContent_navviewLogs:active, #MainContent_Button1:active, 
+#MainContent_Button2:active, #MainContent_cmdcancel:active, #MainContent_cmdgetMO:active,
+#MainContent_cmddirect:active, #MainContent_cmdindirect:active, #MainContent_cmdprodd:active, 
+#MainContent_cmdstart:active, #MainContent_cmdok:active, #MainContent_cmdcanc:active, #MainContent_cmdstop:active,
+#MainContent_btnaddsubs:active, #MainContent_cmdcontinue:active
+{
+    background: rgb(32, 193, 255);
+}
+
+#MainContent_btnnomo, #MainContent_cancelchangeop, #MainContent_cmdgetmo, #MainContent_cmdgetref,
+#MainContent_btnaddsubs, #MainContent_changeop1, #MainContent_changeop2, #MainContent_changeop3,
+#MainContent_cmdcancel, #MainContent_cmdgetMO, #MainContent_cmddirect, #MainContent_cmdindirect,
+#MainContent_cmdprodd, #MainContent_cmdcontinue, #MainContent_cmdok, #MainContent_cmdcanc, #MainContent_cmdstop,
+#MainContent_cmdstart
+{
+    border: none;
+    background: rgb(163, 163, 163);
+    padding: 3px 20px;
+    color: rgb(252, 252, 252);
+    font-weight: bolder;
+}
+
+
+.h2ness {
+font-size: 2.5em;
+font-weight: bold;
+color: rgb(39, 116, 177);
+text-shadow: grey 5px 6px 7px;
+}
+
+.mo
+{
+    background-color: rgb(231, 231, 231);
+    padding: 0px 16px;
+}   
+
+#MainContent_btnaddsubs{
+    white-space: normal;
+    width: 210px;
+}
+.additionalTrue{
+    background-color: rgb(241, 212, 214) !important;
+    color: Black !important;
+}   
+ .operator
+{
+    background-color: rgb(231, 231, 231);
+padding: 0px 38px;
+    }
+
+tr.operator
+{
+    padding: 3px 14px !important;
+}
+.tbl_task{
+    margin: 0 auto;
+    width: 90%;
+}
+
+table{
+    border-collapse:collapse;
+}
+    .tbl_task tr:first-child td {
+        color: Blue;
+    }
+    .tbl_task tr:first-child td {
+        color: rgb(250, 250, 250);
+        font-weight: bold;
+        background-color: #3498db;
+        border: none;
+    }
+    .tbl_task td
+    {
+        border: 2px solid #D6D6D6;
+        padding: 6px;
+        vertical-align: top;
+        font-size: 10px;
+    }
+    select#MainContent_ddltype {
+        width: 150px;
+    }
+    .registration
+    {
+    background-color: rgb(231, 231, 231);
+    padding: 8px 2px;
+    margin-left: 15px;
+    width: 36%;
+    }
+
+.username
+{
+    width: 238px;
+    float: right;
+    position: relative;
+    top: -77px;
+    text-align: right;
+    font-size: 14px;
+    color: #3498db;
+    text-transform: capitalize;
+    padding-right: 20px;
+}
+
+.mainerror
+{
+    width: 95%;
+    background-color: pink;
+    margin-left: 25px;
+    padding: 6px;
+    border: 1px solid rgb(236, 199, 199);
+}
+
+.recoverdiv
+{
+    width: 95%;
+    background-color: rgb(182, 226, 182);
+    margin-left: 25px;
+    padding: 6px;
+    border: green;
+}
+span#MainContent_lblerror {
+    margin-left: 26px;
+}
+tr.head {
+    font-size: 11px;
+    background-color: #B9B7B7;
+    font-weight: bold;
+}
+
+.tasktitle {
+    margin-left: 25px;
+    margin-bottom: 25px;
+}
+
+.tblreg {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.tblre tr,.tblre td,.tblre table
+{
+    border:1px solid rgb(241, 241, 241);
+    width: 200px;
+    }
+    .tblre tr:first-child td {
+        color: Blue;
+    }
+    .tblre tr:first-child td {
+        color: rgb(250, 250, 250);
+        font-weight: bold;
+        background-color: #3498db;
+        border: none;
+    }
+a {
+    text-decoration: none;
+    color: rgb(74, 74, 75) !important;
+}
+a:hover {
+    text-decoration: none;
+    color: rgb(155, 155, 160) !important;
+}
+
+.tbldt {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.divdt tr,.divdt td,.divdt table
+{
+    border:1px solid rgb(241, 241, 241);
+    width: 650px;
+    }
+    .divdt tr:first-child td {
+        color: Blue;
+    }
+    .divdt tr:first-child td {
+        color: rgb(250, 250, 250);
+        font-weight: bold;
+        background-color: #3498db;
+        border: none;
+    }
+    .dttitle {
+margin-left: 224px;
+}
+
+table#logistics {
+    margin-left: 26px;
+    text-align: left;
+    border: 1px solid #000;
+}
+
+#logistics th {
+    padding: 8px;
+    border: 1px solid #6D6B6B;
+    background-color: #ccc;
+}
+
+#logistics td {
+    padding: 8px;
+    border: 1px solid #6D6B6B;
+}
+
+input#MainContent_btnout {
+    float: right;
+}
+
+ul#MainContent_rdallow {
+    list-style: none;
+    margin-left: -45px;
+}
+
+ul#MainContent_rdallow li {
+    display: inline;
+}
+
+.divlogin {
+    background-color: rgb(233, 235, 236);
+    width: 50%;
+    margin: 0 auto;
+}
+
+.diverror {
+    background: url('error.png') no-repeat scroll 0% 0% / 39px 30px #FFC0CB;
+    margin: 0 auto;
+    width: 98%;
+    padding: 0px;
+    background-position: 10px 3px;
+    height: 37px;
+}
+.divwarning {
+    background: url('warn.png') no-repeat scroll 0% 0% / 39px 30px rgba(252, 251, 235, 1);
+    margin: 0 auto;
+    width: 98%;
+    padding: 0px;
+    background-position: 10px 3px;
+    height: 37px;
+}
+.labelerror {
+    margin-left: 58px;
+}
+a.level1.static:hover{
+    color: white !important;
+}
+#menunavi a.dynamic.highlighted{
+    color: white !important;
+}
+#menunavi {
+    width: 100%;
+}
+#menunavi li:nth-child(6) a{
+    color: Orange !important;
+}
+.user {
+    position: absolute;
+    top: 58px;
+    right: 120px;
+    color: #327FF7;
+    text-transform: uppercase;
+    text-align: right;
+}
+.noadditionalsubs{
+    background: rgb(54, 135, 180) !important;
+}
+#menunavi a.popout {
+    padding-right: 40px !important;
+}
+
+#MainContent_titleremarks, #MainContent_titletimetype{
+    font-size: 40px;
+    font-weight: bolder;
+    color: rgba(255, 108, 0, 1);
+    font-family: arial;
+    text-shadow: -2px 3px 3px #ccc;
+    position: relative;
+}
+
+#MainContent_lblhms{
+    font-size: 37px;
+    font-weight: bolder;
+    color: #3498DB;
+}
+#MainContent_lblnomo {
+    color: #008000;
+    font-size: 20px;
+    font-weight: bolder;
+}
+#MainContent_lblchangeover{
+    color: rgba(18, 177, 110, 1) !important;
+    font-size: 16px;
+    font-weight: bolder;
+    margin-left: 20px;
+}
+#MainContent_lblsecondsinchangeover{
+    color: rgba(255, 99, 0, 1);
+    font-weight: bold;
+}
+#menuoperator, #menudbasetting {
+    width: 100%;
+}
+
+/****START*****/
+#MainContent_cmdstart{
+}
+/****START*****/

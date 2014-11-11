@@ -1,0 +1,135 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeFile="Site.Master.vb" Inherits="Site" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title></title>
+    <script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/script.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <link href="Styles/jquery.confirm.css" rel="stylesheet" type="text/css" />
+    <script src="Scripts/v1.js" type="text/javascript"></script>
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style2
+        {
+            width: 102px;
+            height: 79px;
+        }
+    </style>
+</head>
+<body>
+    <form runat="server">
+    <div class="page">
+    <div class="header">
+            &nbsp;&nbsp;<img alt="" class="style2" src="Styles/logo-apo.png" /><h1> WEBSHOPFLOOR</h1>
+    </div>
+    <div class="user">
+        <asp:Label ID="lblusername" runat="server"></asp:Label>
+        </div>
+        <div class="main">
+            <asp:Menu ID="menunavi" runat="server" BackColor="#D5EDFD" 
+                DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="10pt" 
+                ForeColor="White" Orientation="Horizontal" StaticSubMenuIndent="10px" 
+                Target="_blank">
+            <DynamicHoverStyle BackColor="#5487B4" ForeColor="White" Font-Size="10pt" />
+            <DynamicMenuItemStyle HorizontalPadding="10px" VerticalPadding="10px" />
+            <DynamicMenuStyle BackColor="#FFFBD6" ForeColor="White" />
+            <DynamicSelectedStyle BackColor="#FFCC66" />
+                <DynamicItemTemplate>
+                    <%# Eval("Text") %>
+                </DynamicItemTemplate>
+            <Items>
+                <asp:MenuItem Text="Home" Value="home" ToolTip="Home" ></asp:MenuItem>
+                <asp:MenuItem Text="Get MO" Value="getmo" ToolTip="Get MO">
+                    <asp:MenuItem Text="GET RECOVER MO" Value="getrecovermo"></asp:MenuItem>
+                </asp:MenuItem>
+                <asp:MenuItem Text="Manual MO" Value="manualmo"></asp:MenuItem>
+                <asp:MenuItem Text="View Items" Value="viewitems" 
+                    ToolTip="View Preview Created MO" Target="_new"></asp:MenuItem>
+                <asp:MenuItem Text="Settings" Value="settings">
+                    <asp:MenuItem Text="Registration" Value="registration"></asp:MenuItem>
+                    <asp:MenuItem Text="Downtime" Value="downtime"></asp:MenuItem>
+                    <asp:MenuItem Text="Database Setup" Value="dbsetup">
+                        <asp:MenuItem Text="Database Setup" Value="dbasesetup" 
+                            ToolTip="Your account will be logout to modify the Database Settings"></asp:MenuItem>
+                        <asp:MenuItem Text="User Settings" Value="usettings">
+                            <asp:MenuItem Text="Operator Types" Value="operatortypes"></asp:MenuItem>
+                            <asp:MenuItem Text="Operation Types" Value="operationtypes"></asp:MenuItem>
+                            <asp:MenuItem Text="User Types" Value="utypes"></asp:MenuItem>
+                        </asp:MenuItem>
+                    </asp:MenuItem>
+                </asp:MenuItem>
+                <asp:MenuItem Text="Logout" Value="logout"></asp:MenuItem>
+            </Items>
+            <StaticHoverStyle BackColor="#5487B4" ForeColor="blue" />
+            <StaticMenuItemStyle HorizontalPadding="30px" VerticalPadding="7px" />
+            <StaticSelectedStyle BackColor="#FFCC66" />
+            </asp:Menu>
+            <asp:Menu ID="menuoperator" runat="server" BackColor="#D5EDFD" 
+                DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="10pt" 
+                ForeColor="White" Orientation="Horizontal" StaticSubMenuIndent="10px" 
+                Visible="False" Target="_blank">
+            <DynamicHoverStyle BackColor="#5487B4" ForeColor="White" Font-Size="10pt" />
+            <DynamicMenuItemStyle HorizontalPadding="10px" VerticalPadding="10px" />
+            <DynamicMenuStyle BackColor="#FFFBD6" ForeColor="White" />
+            <DynamicSelectedStyle BackColor="#FFCC66" />
+                <DynamicItemTemplate>
+                    <%# Eval("Text") %>
+                </DynamicItemTemplate>
+            <Items>
+                <asp:MenuItem Text="Home" Value="home" ToolTip="Home" ></asp:MenuItem>
+                <asp:MenuItem Text="Get MO" Value="getmo" ToolTip="Get MO">
+                </asp:MenuItem>
+                <asp:MenuItem Text="View Items" Value="viewitems" 
+                    ToolTip="View Preview Created MO" Target="_new"></asp:MenuItem>
+                <asp:MenuItem Text="Logout" Value="logout"></asp:MenuItem>
+            </Items>
+            <StaticHoverStyle BackColor="#5487B4" ForeColor="blue" />
+            <StaticMenuItemStyle HorizontalPadding="30px" VerticalPadding="7px" />
+            <StaticSelectedStyle BackColor="#FFCC66" />
+            </asp:Menu>
+            <asp:Menu ID="menudbasetting" runat="server" BackColor="#D5EDFD" 
+                DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="10pt" 
+                ForeColor="White" Orientation="Horizontal" StaticSubMenuIndent="10px" 
+                Visible="False">
+            <DynamicHoverStyle BackColor="#5487B4" ForeColor="White" Font-Size="10pt" />
+            <DynamicMenuItemStyle HorizontalPadding="10px" VerticalPadding="10px" />
+            <DynamicMenuStyle BackColor="#FFFBD6" ForeColor="White" />
+            <DynamicSelectedStyle BackColor="#FFCC66" />
+                <DynamicItemTemplate>
+                    <%# Eval("Text") %>
+                </DynamicItemTemplate>
+            <Items>
+                <asp:MenuItem Text="SAP Settings" Value="sap">
+                </asp:MenuItem>
+                <asp:MenuItem Text="Shopfloor Settings" Value="sh" ></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Login" Value="login">
+                </asp:MenuItem>
+            </Items>
+            <StaticHoverStyle BackColor="#5487B4" ForeColor="blue" />
+            <StaticMenuItemStyle HorizontalPadding="30px" VerticalPadding="7px" />
+            <StaticSelectedStyle BackColor="#FFCC66" />
+            </asp:Menu>
+            <asp:Label ID="Label1" runat="server"></asp:Label>
+            <br />
+            
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <br />
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="footer">
+        <b>BEST VIEWED IN FIREFOX&nbsp;&nbsp;</b>
+        <br />
+        Created by MIS - UGEC&nbsp;&nbsp;&nbsp; 
+    </div>
+    </form>
+    <script src="Scripts/jquery.confirm.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿<%@ Page Title="Home Page" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="false"
+    CodeFile="Default.aspx.vb" Inherits="_Default" %>
+
+<asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
+    <style type="text/css">
+        .style1
+        {
+            height: 28px;
+        }
+        #menunavi{
+            visibility:hidden;
+        }
+        </style>
+</asp:Content>
+<asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+    <asp:Label ID="lblerr" runat="server" ForeColor="#CC3300"></asp:Label>
+    <div class="divlogin"><br />
+       <table class='login_table' >
+       <tr>
+        <td align="right">Login Name :</td>
+        <td ><asp:TextBox ID="txtmachine_name" runat="server" Width="188px"></asp:TextBox></td>
+        </tr>
+        <tr>
+        <td align="right">Password :</td>
+        <td><asp:TextBox ID="txtpword" runat="server" TextMode="Password" Width="187px"></asp:TextBox>
+        </td>
+        </tr></table>
+        <center><asp:Button ID="cmdlogin" runat="server" Text="Login" class="btn" Width="148px"/></center>
+        <br />
+        </div>
+
+</asp:Content>
